@@ -86,12 +86,12 @@ const App = () => {
           reportContent += `[MISSING] ${q.title}\n -> (Không có hình ảnh)\n\n`;
         }
       });
-      zip.file("Tong_Hop_Ket_Qua.txt", reportContent);
+      zip.file("Tổng Hợp Kết Quả.txt", reportContent);
 
       // 2. Nén thành Base64 để gửi đi
       const zipBase64 = await zip.generateAsync({ type: "base64" });
       const dateStr = new Date().toISOString().slice(0, 10).replace(/-/g, "");
-      const fileName = `Bao_Cao_${dateStr}.zip`;
+      const fileName = `Report_${dateStr}.zip`;
 
       // 3. Gửi lên Google Apps Script
       const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx0F7OY0wxQ2OvTbc3k9yhFpq_vA3wkt-4Sr-6vSR7CPOugPsxWol2IuAR4gfwJMy-nLg/exec"; 
