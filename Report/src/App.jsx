@@ -8,22 +8,14 @@ import { Camera, ChevronRight, ChevronLeft, CheckCircle, Upload, RefreshCw, Imag
  import anhminhhoa2 from './assets/Ref_2.jpg';
  import anhminhhoa3 from './assets/Ref_3.jpg';
  import anhminhhoa4 from './assets/Ref_4.jpg';
- import anhminhhoa5 from './assets/Ref_5.jpg';
- import anhminhhoa6 from './assets/Ref_6.jpg';
- import anhminhhoa7 from './assets/Ref_7.jpg';
 
-
-// --- DANH SÁCH 8 CÂU HỎI ---
+// --- DANH SÁCH 4 CÂU HỎI ---
 
 const QUESTIONS = [
   { id: 1, title: "1. Ảnh tổng quan Inverter, Tủ AC Solar", desc: "Có bị chất đồ dễ gây cháy không?", refImage: anhminhhoa1 },
-  { id: 2, title: "2. Ảnh mở cửa tủ AC Solar", desc: "Chụp ảnh trong tủ AC Solar", refImage: anhminhhoa2 },
-  { id: 3, title: "3. Ảnh kiểm tra cờ chống sét", desc: "Kiểm tra tất cả cờ chống sét AC/DC có chuyển màu bất thường không?", refImage: anhminhhoa3 },
-  { id: 4, title: "4. Ảnh đấu nối Solar và tủ MSB Cửa hàng", desc: "Kiểm tra xem phần đấu nối có khả năng phát nhiệt không?", refImage: anhminhhoa4 },
-  { id: 5, title: "5. Ảnh các đầu MC4 ở tủ AC", desc: "Có bị biến dạng không? (Chảy nhựa,...)", refImage: anhminhhoa5 },
-  { id: 6, title: "6. Ảnh các đầu MC4 ở Inverter", desc: "Có bị biến dạng không? (chảy nhựa,...)", refImage: anhminhhoa6 },
-  { id: 7, title: "7. Ảnh vị trí gắn Inverter với tường", desc: "Có khả năng bị bung ra không?", refImage: anhminhhoa7 },
-  { id: 8, title: "8. Ảnh vị trí gắn tủ AC với tường", desc: "Có khả năng bị bung ra không?", refImage: "https://placehold.co/600x400/e2e8f0/475569?text=Minh+Hoa" },
+  { id: 2, title: "2. Ảnh các đầu MC4 ở tủ AC", desc: "Có bị biến dạng không? (Chảy nhựa,...)", refImage: anhminhhoa2 },
+  { id: 3, title: "3. Ảnh các đầu MC4 ở Inverter", desc: "Có bị biến dạng không? (chảy nhựa,...)", refImage: anhminhhoa3 },
+  { id: 4, title: "4. Ảnh mở cửa tủ AC Solar", desc: "Chụp ảnh trong tủ AC Solar", refImage: anhminhhoa4 },
 ];
 
 const App = () => {
