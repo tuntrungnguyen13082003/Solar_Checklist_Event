@@ -8,6 +8,7 @@ import { Camera, ChevronRight, ChevronLeft, CheckCircle, Upload, RefreshCw, Imag
  import anhminhhoa2 from './assets/Ref_2.jpg';
  import anhminhhoa3 from './assets/Ref_3.jpg';
  import anhminhhoa4 from './assets/Ref_4.jpg';
+ import anhminhhoa5 from './assets/Ref_5.jpg';
 
 // --- DANH SÁCH 4 CÂU HỎI ---
 
@@ -16,6 +17,7 @@ const QUESTIONS = [
   { id: 2, title: "2. Ảnh các đầu MC4 ở tủ AC", desc: "Có bị biến dạng không? (Chảy nhựa,...)", refImage: anhminhhoa2 },
   { id: 3, title: "3. Ảnh các đầu MC4 ở Inverter", desc: "Có bị biến dạng không? (chảy nhựa,...)", refImage: anhminhhoa3 },
   { id: 4, title: "4. Ảnh mở cửa tủ AC Solar", desc: "Chụp ảnh trong tủ AC Solar", refImage: anhminhhoa4 },
+  { id: 5, title: "5. Ảnh đấu nối Solar và tủ MSB Cửa hàng", desc: "Phần đấu nối có khả năng phát nhiệt không?", refImage: anhminhhoa5 },
 ];
 
 const App = () => {
