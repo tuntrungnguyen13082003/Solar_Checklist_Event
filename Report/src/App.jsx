@@ -4,10 +4,10 @@ import { Camera, ChevronRight, ChevronLeft, CheckCircle, Upload, RefreshCw, Imag
 
  import JSZip from 'jszip';
 
- import anhminhhoa1 from './assets/Ref_1.jpg';
- import anhminhhoa2 from './assets/Ref_2.jpg';
- import anhminhhoa3 from './assets/Ref_3.jpg';
- import anhminhhoa4 from './assets/Ref_4.jpg';
+ //import anhminhhoa1 from './assets/Ref_1.jpg';
+ //import anhminhhoa2 from './assets/Ref_2.jpg';
+ //import anhminhhoa3 from './assets/Ref_3.jpg';
+ //import anhminhhoa4 from './assets/Ref_4.jpg';
 
 // --- DANH SÁCH 4 CÂU HỎI ---
 
