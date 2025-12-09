@@ -5,5 +5,5 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   // ĐÃ XÓA DÒNG BASE
-  base: '/new_report/',
+  base: '/Solar_Checklist_Event/',
 })
