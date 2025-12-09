@@ -75,7 +75,7 @@ const App = () => {
       QUESTIONS.forEach((q) => {
         const imgData = userImages[q.id];
         // Tạo tên file
-        const cleanName = q.title.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "_").replace(/\./g, "").replace(/[^a-zA-Z0-9_]/g, "");
+        const cleanName = q.title;
         const fileName = `${cleanName}.jpg`;
 
         if (imgData) {
