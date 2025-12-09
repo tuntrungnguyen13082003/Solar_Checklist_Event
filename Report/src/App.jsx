@@ -66,9 +66,9 @@ const App = () => {
     try {
       // 1. Tạo file ZIP
       const zip = new JSZip(); // Sử dụng thư viện JSZip
-      const imgFolder = zip.folder("Hinh_Anh_Bao_Cao");
+      const imgFolder = zip.folder("Hình Ảnh Báo Cáo");
       
-      let reportContent = `BÁO CÁO KIỂM TRA CỬA HÀNG\n`;
+      let reportContent = `Solar Checklist Report\n`;
       reportContent += `Ngày tạo: ${new Date().toLocaleString('vi-VN')}\n`;
       reportContent += `==========================================\n\n`;
 
