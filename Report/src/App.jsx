@@ -76,7 +76,7 @@ const App = () => {
         const imgData = userImages[q.id];
         // Tạo tên file
         const cleanName = q.title;
-        const fileName = `${cleanName}.jpg`;
+        const fileName = ${cleanName}.jpg`;
 
         if (imgData) {
           const base64Data = imgData.split(',')[1];
