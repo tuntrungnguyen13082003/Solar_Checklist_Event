@@ -222,10 +222,16 @@ const App = () => {
             <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 md:h-full">
                 <h3 className="text-gray-500 font-bold text-sm uppercase mb-2">Yêu cầu & Ảnh mẫu</h3>
                 <p className="text-gray-800 text-lg mb-4 md:hidden">{currentQ.desc}</p>
-                <div className="relative rounded-xl overflow-hidden bg-gray-100 border border-gray-200 aspect-video md:aspect-auto md:h-[400px]">
-                    <span className="absolute top-3 left-3 bg-black/60 text-white text-xs font-bold px-2 py-1 rounded backdrop-blur-md z-10">ẢNH MẪU</span>
-                    <img src={currentQ.refImage} alt="Ref" className="w-full h-full object-cover" />
-                </div>
+                <div className="relative rounded-xl bg-gray-100 border border-gray-200 flex items-center justify-center md:h-[400px]">
+                 <span className="absolute top-3 left-3 bg-black/60 text-white text-xs font-bold px-2 py-1 rounded backdrop-blur-md z-10">
+                   ẢNH MẪU
+                 </span>
+                 <img
+                   src={currentQ.refImage}
+                   alt="Ref"
+                   className="max-h-[360px] w-auto object-contain"
+                 />
+               </div>
             </div>
         </div>
 
