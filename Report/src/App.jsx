@@ -50,7 +50,7 @@ const App = () => {
     }
   };
 
-  // --- XỬ LÝ 3: UPLOAD FILE LÊN GOOGLE DRIVE (ĐÃ SỬA) ---
+  // --- XỬ LÝ 3: UPLOAD FILE LÊN GOOGLE DRIVE ---
   const uploadReport = async () => {
     // Kiểm tra xem đã cài đặt thư viện chưa (tránh lỗi khi chạy demo)
     if (typeof JSZip === 'undefined') {
@@ -70,44 +70,24 @@ const App = () => {
       const zip = new JSZip(); // Sử dụng thư viện JSZip
       const imgFolder = zip.folder("Hình Ảnh Báo Cáo");
       
-      let reportContent = `Solar Checklist Report\n`;
-      reportContent += `Ngày tạo: ${new Date().toLocaleString('vi-VN')}\n`;
-      reportContent += `==========================================\n\n`;
+      // let reportContent = `Solar Checklist Report\n`;
+      // reportContent += `Ngày tạo: ${new Date().toLocaleString('vi-VN')}\n`;
+      // reportContent += `==========================================\n\n`;
 
-      // QUESTIONS.forEach((q) => {
-      //   const imgData = userImages[q.id];
-      //   // Tạo tên file
-      //   const cleanName = q.title.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "_").replace(/\./g, "").replace(/[^a-zA-Z0-9_]/g, "");
-      //   const fileName = `${cleanName}.jpg`;
-
-      //   if (imgData) {
-      //     const base64Data = imgData.split(',')[1];
-      //     imgFolder.file(fileName, base64Data, { base64: true });
-      //     reportContent += `[OK] ${q.title}\n -> Ảnh minh chứng: ${fileName}\n\n`;
-      //   } else {
-      //     reportContent += `[MISSING] ${q.title}\n -> (Không có hình ảnh)\n\n`;
-      //   }
-      // });
-     QUESTIONS.forEach((q) => {
-    const imgData = userImages[q.id];
-
-    // --- SỬA Ở ĐÂY ---
-    // 1. Thay ". " (dấu chấm + dấu cách) thành "_" (Ví dụ: "4. Ảnh" -> "4_Ảnh")
-    // 2. Loại bỏ các ký tự bị cấm đặt tên file trên máy tính (/ \ : * ? " < > |)
-    const cleanName = q.title.replace(". ", "_").replace(/[:\/\\*?"<>|]/g, "");
-    
-    const fileName = `${cleanName}.jpg`;
-    // ----------------
-
-    if (imgData) {
-      const base64Data = imgData.split(',')[1];
-      imgFolder.file(fileName, base64Data, { base64: true });
-      reportContent += `[OK] ${q.title}\n -> Ảnh minh chứng: ${fileName}\n\n`;
-    } else {
-      reportContent += `[MISSING] ${q.title}\n -> (Không có hình ảnh)\n\n`;
-    }
-});
-      zip.file("Tổng Hợp Kết Quả.txt", reportContent);
+//      QUESTIONS.forEach((q) => {
+//     const imgData = userImages[q.id];
+//     const cleanName = q.title.replace(". ", "_").replace(/[:\/\\*?"<>|]/g, "");
+//     const fileName = `${cleanName}.jpg`;
+//     // ----------------
+//     if (imgData) {
+//       const base64Data = imgData.split(',')[1];
+//       imgFolder.file(fileName, base64Data, { base64: true });
+//       reportContent += `[OK] ${q.title}\n -> Ảnh minh chứng: ${fileName}\n\n`;
+//     } else {
+//       reportContent += `[MISSING] ${q.title}\n -> (Không có hình ảnh)\n\n`;
+//     }
+// });
+      //zip.file("Tổng Hợp Kết Quả.txt", reportContent);
 
       // 2. Nén thành Base64 để gửi đi
       const zipBase64 = await zip.generateAsync({ type: "base64" });
