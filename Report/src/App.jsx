@@ -72,20 +72,39 @@ const App = () => {
       reportContent += `Ngày tạo: ${new Date().toLocaleString('vi-VN')}\n`;
       reportContent += `==========================================\n\n`;
 
-      QUESTIONS.forEach((q) => {
-        const imgData = userImages[q.id];
-        // Tạo tên file
-        const cleanName = q.title.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "_").replace(/\./g, "").replace(/[^a-zA-Z0-9_]/g, "");
-        const fileName = `${cleanName}.jpg`;
+      // QUESTIONS.forEach((q) => {
+      //   const imgData = userImages[q.id];
+      //   // Tạo tên file
+      //   const cleanName = q.title.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "_").replace(/\./g, "").replace(/[^a-zA-Z0-9_]/g, "");
+      //   const fileName = `${cleanName}.jpg`;
 
-        if (imgData) {
-          const base64Data = imgData.split(',')[1];
-          imgFolder.file(fileName, base64Data, { base64: true });
-          reportContent += `[OK] ${q.title}\n -> Ảnh minh chứng: ${fileName}\n\n`;
-        } else {
-          reportContent += `[MISSING] ${q.title}\n -> (Không có hình ảnh)\n\n`;
-        }
-      });
+      //   if (imgData) {
+      //     const base64Data = imgData.split(',')[1];
+      //     imgFolder.file(fileName, base64Data, { base64: true });
+      //     reportContent += `[OK] ${q.title}\n -> Ảnh minh chứng: ${fileName}\n\n`;
+      //   } else {
+      //     reportContent += `[MISSING] ${q.title}\n -> (Không có hình ảnh)\n\n`;
+      //   }
+      // });
+     QUESTIONS.forEach((q) => {
+    const imgData = userImages[q.id];
+
+    // --- SỬA Ở ĐÂY ---
+    // 1. Thay ". " (dấu chấm + dấu cách) thành "_" (Ví dụ: "4. Ảnh" -> "4_Ảnh")
+    // 2. Loại bỏ các ký tự bị cấm đặt tên file trên máy tính (/ \ : * ? " < > |)
+    const cleanName = q.title.replace(". ", "_").replace(/[:\/\\*?"<>|]/g, "");
+    
+    const fileName = `${cleanName}.jpg`;
+    // ----------------
+
+    if (imgData) {
+      const base64Data = imgData.split(',')[1];
+      imgFolder.file(fileName, base64Data, { base64: true });
+      reportContent += `[OK] ${q.title}\n -> Ảnh minh chứng: ${fileName}\n\n`;
+    } else {
+      reportContent += `[MISSING] ${q.title}\n -> (Không có hình ảnh)\n\n`;
+    }
+});
       zip.file("Tổng Hợp Kết Quả.txt", reportContent);
 
       // 2. Nén thành Base64 để gửi đi
