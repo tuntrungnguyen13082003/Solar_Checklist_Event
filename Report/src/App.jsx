@@ -9,21 +9,15 @@ import { Camera, ChevronRight, ChevronLeft, CheckCircle, Upload, RefreshCw, Imag
  import anhminhhoa3 from './assets/Ref_3.jpg';
  import anhminhhoa4 from './assets/Ref_4.jpg';
  import anhminhhoa5 from './assets/Ref_5.jpg';
- import anhminhhoa6 from './assets/Ref_6.jpg';
- import anhminhhoa7 from './assets/Ref_7.jpg';
 
-
-// --- DANH SÁCH 8 CÂU HỎI ---
+// --- DANH SÁCH 4 CÂU HỎI ---
 
 const QUESTIONS = [
   { id: 1, title: "1. Ảnh tổng quan Inverter, Tủ AC Solar", desc: "Có bị chất đồ dễ gây cháy không?", refImage: anhminhhoa1 },
-  { id: 2, title: "2. Ảnh mở cửa tủ AC Solar", desc: "Chụp ảnh trong tủ AC Solar", refImage: anhminhhoa2 },
-  { id: 3, title: "3. Ảnh kiểm tra cờ chống sét", desc: "Kiểm tra tất cả cờ chống sét AC/DC có chuyển màu bất thường không?", refImage: anhminhhoa3 },
-  { id: 4, title: "4. Ảnh đấu nối Solar và tủ MSB Cửa hàng", desc: "Kiểm tra xem phần đấu nối có khả năng phát nhiệt không?", refImage: anhminhhoa4 },
-  { id: 5, title: "5. Ảnh các đầu MC4 ở tủ AC", desc: "Có bị biến dạng không? (Chảy nhựa,...)", refImage: anhminhhoa5 },
-  { id: 6, title: "6. Ảnh các đầu MC4 ở Inverter", desc: "Có bị biến dạng không? (chảy nhựa,...)", refImage: anhminhhoa6 },
-  { id: 7, title: "7. Ảnh vị trí gắn Inverter với tường", desc: "Có khả năng bị bung ra không?", refImage: anhminhhoa7 },
-  { id: 8, title: "8. Ảnh vị trí gắn tủ AC với tường", desc: "Có khả năng bị bung ra không?", refImage: "https://placehold.co/600x400/e2e8f0/475569?text=Minh+Hoa" },
+  { id: 2, title: "2. Ảnh các đầu MC4 ở tủ AC", desc: "Có bị biến dạng không? (Chảy nhựa,...)", refImage: anhminhhoa2 },
+  { id: 3, title: "3. Ảnh các đầu MC4 ở Inverter", desc: "Có bị biến dạng không? (chảy nhựa,...)", refImage: anhminhhoa3 },
+  { id: 4, title: "4. Ảnh mở cửa tủ AC Solar", desc: "Chụp ảnh trong tủ AC Solar", refImage: anhminhhoa4 },
+  { id: 5, title: "5. Ảnh đấu nối Solar và tủ MSB Cửa hàng", desc: "Phần đấu nối có khả năng phát nhiệt không?", refImage: anhminhhoa5 },
 ];
 
 const App = () => {
@@ -56,7 +50,7 @@ const App = () => {
     }
   };
 
-  // --- XỬ LÝ 3: UPLOAD FILE LÊN GOOGLE DRIVE (ĐÃ SỬA) ---
+  // --- XỬ LÝ 3: UPLOAD FILE LÊN GOOGLE DRIVE ---
   const uploadReport = async () => {
     // Kiểm tra xem đã cài đặt thư viện chưa (tránh lỗi khi chạy demo)
     if (typeof JSZip === 'undefined') {
@@ -72,34 +66,40 @@ const App = () => {
     setIsUploading(true);
     
     try {
-      // 1. Tạo file ZIP
-      const zip = new JSZip(); // Sử dụng thư viện JSZip
-      const imgFolder = zip.folder("Hinh_Anh_Bao_Cao");
-      
-      let reportContent = `BÁO CÁO KIỂM TRA CỬA HÀNG\n`;
-      reportContent += `Ngày tạo: ${new Date().toLocaleString('vi-VN')}\n`;
-      reportContent += `==========================================\n\n`;
+      const now = new Date();
+      const timestamp = now.getFullYear() +
+                        String(now.getMonth() + 1).padStart(2, '0') +
+                        String(now.getDate()).padStart(2, '0') + "_" +
+                        String(now.getHours()).padStart(2, '0') +
+                        String(now.getMinutes()).padStart(2, '0') +
+                        String(now.getSeconds()).padStart(2, '0');
 
+     const folderName =
+         now.getFullYear() +
+         String(now.getMonth() + 1).padStart(2, '0') +
+         String(now.getDate()).padStart(2, '0');
+     // 1. Tạo file ZIP
+      const zip = new JSZip();
+      // Tạo folder chứa ảnh bên trong ZIP
+      const imgFolder = zip.folder(`${folderName}`);
+      // Duyệt qua danh sách câu hỏi để lấy ảnh
       QUESTIONS.forEach((q) => {
         const imgData = userImages[q.id];
-        // Tạo tên file
-        const cleanName = q.title.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "_").replace(/\./g, "").replace(/[^a-zA-Z0-9_]/g, "");
-        const fileName = `${cleanName}.jpg`;
-
         if (imgData) {
+          // Tên file chỉ là số ID ---
+          const fileName = `${q.id}.jpg`; 
+          // Lấy dữ liệu ảnh (bỏ phần header data:image/...)
           const base64Data = imgData.split(',')[1];
+          // Thêm ảnh vào trong file ZIP
           imgFolder.file(fileName, base64Data, { base64: true });
-          reportContent += `[OK] ${q.title}\n -> Ảnh minh chứng: ${fileName}\n\n`;
-        } else {
-          reportContent += `[MISSING] ${q.title}\n -> (Không có hình ảnh)\n\n`;
         }
       });
-      zip.file("Tong_Hop_Ket_Qua.txt", reportContent);
 
       // 2. Nén thành Base64 để gửi đi
       const zipBase64 = await zip.generateAsync({ type: "base64" });
-      const dateStr = new Date().toISOString().slice(0, 10).replace(/-/g, "");
-      const fileName = `Bao_Cao_${dateStr}.zip`;
+      // Tạo tên file ZIP theo ngày giờ đầy đủ (Ví dụ: Report_20251209_153000.zip)
+     
+      const fileName = `Report_${timestamp}.zip`;
 
       // 3. Gửi lên Google Apps Script
       const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx0F7OY0wxQ2OvTbc3k9yhFpq_vA3wkt-4Sr-6vSR7CPOugPsxWol2IuAR4gfwJMy-nLg/exec"; 
@@ -211,10 +211,16 @@ const App = () => {
             <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 md:h-full">
                 <h3 className="text-gray-500 font-bold text-sm uppercase mb-2">Yêu cầu & Ảnh mẫu</h3>
                 <p className="text-gray-800 text-lg mb-4 md:hidden">{currentQ.desc}</p>
-                <div className="relative rounded-xl overflow-hidden bg-gray-100 border border-gray-200 aspect-video md:aspect-auto md:h-[400px]">
-                    <span className="absolute top-3 left-3 bg-black/60 text-white text-xs font-bold px-2 py-1 rounded backdrop-blur-md z-10">ẢNH MẪU</span>
-                    <img src={currentQ.refImage} alt="Ref" className="w-full h-full object-cover" />
-                </div>
+                <div className="relative rounded-xl bg-gray-100 border border-gray-200 flex items-center justify-center md:h-[400px]">
+                 <span className="absolute top-3 left-3 bg-black/60 text-white text-xs font-bold px-2 py-1 rounded backdrop-blur-md z-10">
+                   ẢNH MẪU
+                 </span>
+                 <img
+                   src={currentQ.refImage}
+                   alt="Ref"
+                   className="max-h-[360px] w-auto object-contain"
+                 />
+               </div>
             </div>
         </div>
 
