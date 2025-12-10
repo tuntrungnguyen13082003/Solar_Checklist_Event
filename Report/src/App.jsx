@@ -77,7 +77,7 @@ const App = () => {
      // 1. Tạo file ZIP
       const zip = new JSZip();
       // Tạo folder chứa ảnh bên trong ZIP
-      const imgFolder = zip.folder(${timestamp});
+      const imgFolder = zip.folder(`${timestamp}`);
       // Duyệt qua danh sách câu hỏi để lấy ảnh
       QUESTIONS.forEach((q) => {
         const imgData = userImages[q.id];
