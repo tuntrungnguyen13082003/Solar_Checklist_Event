@@ -73,11 +73,15 @@ const App = () => {
                         String(now.getHours()).padStart(2, '0') +
                         String(now.getMinutes()).padStart(2, '0') +
                         String(now.getSeconds()).padStart(2, '0');
-                        
+
+     const folderName =
+         now.getFullYear() +
+         String(now.getMonth() + 1).padStart(2, '0') +
+         String(now.getDate()).padStart(2, '0');
      // 1. Tạo file ZIP
       const zip = new JSZip();
       // Tạo folder chứa ảnh bên trong ZIP
-      const imgFolder = zip.folder(`${timestamp}`);
+      const imgFolder = zip.folder(`${folderName}`);
       // Duyệt qua danh sách câu hỏi để lấy ảnh
       QUESTIONS.forEach((q) => {
         const imgData = userImages[q.id];
