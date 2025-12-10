@@ -66,37 +66,18 @@ const App = () => {
     setIsUploading(true);
     
     try {
-      // 1. Tạo file ZIP
- //      const zip = new JSZip(); // Sử dụng thư viện JSZip
- //      const imgFolder = zip.folder("Hình Ảnh Báo Cáo");
-      
- //      let reportContent = `Solar Checklist Report\n`;
- //      reportContent += `Ngày tạo: ${new Date().toLocaleString('vi-VN')}\n`;
- //      reportContent += `==========================================\n\n`;
-
- //    QUESTIONS.forEach((q) => {
- //     const imgData = userImages[q.id];
- //     const cleanName = q.title.replace(". ", "_").replace(/[:\/\\*?"<>|]/g, "");
- //     const fileName = `${cleanName}.jpg`;
- //     // ----------------
- //     if (imgData) {
- //       const base64Data = imgData.split(',')[1];
- //       imgFolder.file(fileName, base64Data, { base64: true });
- //       reportContent += `[OK] ${q.title}\n -> Ảnh minh chứng: ${fileName}\n\n`;
- //     } else {
- //       reportContent += `[MISSING] ${q.title}\n -> (Không có hình ảnh)\n\n`;
- //     }
- // });
- //      zip.file("Tổng Hợp Kết Quả.txt", reportContent);
-
- //      // 2. Nén thành Base64 để gửi đi
- //      const zipBase64 = await zip.generateAsync({ type: "base64" });
- //      const dateStr = new Date().toISOString().slice(0, 10).replace(/-/g, "");
- //      const fileName = `Report_${dateStr}.zip`;
+      const now = new Date();
+      const timestamp = now.getFullYear() +
+                        String(now.getMonth() + 1).padStart(2, '0') +
+                        String(now.getDate()).padStart(2, '0') + "_" +
+                        String(now.getHours()).padStart(2, '0') +
+                        String(now.getMinutes()).padStart(2, '0') +
+                        String(now.getSeconds()).padStart(2, '0');
+                        
      // 1. Tạo file ZIP
       const zip = new JSZip();
-      // Tạo folder chứa ảnh bên trong ZIP (để cho gọn)
-      const imgFolder = zip.folder("Hinh_Anh");
+      // Tạo folder chứa ảnh bên trong ZIP
+      const imgFolder = zip.folder(${timestamp});
       // Duyệt qua danh sách câu hỏi để lấy ảnh
       QUESTIONS.forEach((q) => {
         const imgData = userImages[q.id];
@@ -113,14 +94,7 @@ const App = () => {
       // 2. Nén thành Base64 để gửi đi
       const zipBase64 = await zip.generateAsync({ type: "base64" });
       // Tạo tên file ZIP theo ngày giờ đầy đủ (Ví dụ: Report_20251209_153000.zip)
-      const now = new Date();
-      const timestamp = now.getFullYear() +
-                        String(now.getMonth() + 1).padStart(2, '0') +
-                        String(now.getDate()).padStart(2, '0') + "_" +
-                        String(now.getHours()).padStart(2, '0') +
-                        String(now.getMinutes()).padStart(2, '0') +
-                        String(now.getSeconds()).padStart(2, '0');
-                        
+     
       const fileName = `Report_${timestamp}.zip`;
 
       // 3. Gửi lên Google Apps Script
